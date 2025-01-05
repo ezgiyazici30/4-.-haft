@@ -1,157 +1,124 @@
-﻿
+﻿//3. Aşırı Yüklenmiş (Overloaded) Metot ile Farklı Türdeki Verilerin Toplamını Bulma
+//Soru: Aynı isimle üç farklı CalculateSum metodu yazın.İlk metot iki int sayıyı toplasın, ikinci metot iki double sayıyı toplasın, üçüncü metot ise üç int sayıyı toplasın.
+//İpucu: Metot isimleri aynı olmalı fakat parametre türleri farklı olmalıdır.
 
-// üçgen alan
-class Program
+static int sayitopla(int a, int b)
 {
-    static double HesaplaUcgenAlani()
+    return a + b;
+}
+
+static double sayitopla(double a, double b)
+{
+    return a + b;
+}
+
+static int sayitopla(int a, int b, int c)
+{
+    return a + b + c;
+}
+
+//4. Recursive Metot ile Fibonacci Dizisi Hesaplama
+//Soru: Bir sayının Fibonacci dizisindeki karşılığını hesaplayan özyinelemeli(recursive) bir metot yazın.
+//fibonacci(5) çağrısı, dizideki 5. Fibonacci sayısını döndürmelidir.
+//İpucu: int dönen ve kendini çağırarak Fibonacci dizisi üreten bir metot yazmalısınız.
+
+
+static int fibonacci(int n)
+{
+    if (n == 0)
+        return 0;
+    if (n == 1)
+        return 1;
+
+    return fibonacci(n - 1) + fibonacci(n - 2);
+
+
+}
+//5. Params ile Sınırsız Sayıda Parametre Alarak Ortalama Hesaplama
+//Soru: params anahtar kelimesini kullanarak sınırsız sayıda double parametre alabilen
+//ve bu sayılar arasındaki ortalamayı hesaplayan bir metot yazın.
+//İpucu: params ile dizi gibi parametre alabilir ve döngü kullanarak ortalamayı hesaplayabilirsiniz.
+
+static double ortalama(params double[] x)
+{
+    double toplam = 0;
+    foreach (double i in x)
     {
-        Console.Write("Üçgenin taban uzunluğunu girin: ");
-        double taban = Convert.ToDouble(Console.ReadLine());
-        Console.Write("Üçgenin yüksekliğini girin: ");
-        double yukseklik = Convert.ToDouble(Console.ReadLine());
-        double alan = (taban * yukseklik) / 2;
-        return alan;
+        toplam = toplam + i;
     }
-    static void Main(string[] args)
+    return toplam / x.Length;
+}
+
+
+
+//6. Dizi Elemanlarını Toplayan ve Filtreleme Şartı Ekleyen Metot
+//Soru: int türünde bir dizi ve bir filtre değeri(int) alan bir metot yazın.
+//Bu metot, filtre değerinden büyük olan tüm elemanları toplasın ve toplamı döndürsün.
+//İpucu: int türünde bir metot tanımlayıp foreach döngüsü ile filtreyi uygulayarak toplamı hesaplayabilirsiniz.
+
+static int dizitoplamı(int[] a, int b)
+{
+    int toplam = 0;
+    foreach (int i in a)
     {
-        double ucgenAlani = HesaplaUcgenAlani();
-        Console.WriteLine("Üçgenin alanı: " + ucgenAlani);
+        if (i > b)
+            toplam = toplam + i;
+
+    }
+    return toplam;
+}
+
+
+//7. Seçmeli (Optional) Parametre ile Belirli Yaştan Sonraki Yılları Sayma
+//Soru: Bir yaş değeri alan bir metot yazın.Eğer yaş belirtilmezse varsayılan olarak
+//18 olsun ve metot, verilen yaşın 18’den ne kadar fazla olduğunu döndürsün.
+//İpucu: int türünde bir metot tanımlayıp varsayılan parametre kullanarak yaşı hesaplayabilirsiniz.
+
+static int yillarisayma(int yas)
+{
+    if (yas >= 18)
+    {
+        return yas - 18;
+    }
+    else if (0 < yas && yas < 18)
+    {
+        return yas - 18;
+    }
+    else
+    {
+        yas = 18;
+        return yas - 18;
     }
 }
-//
-  
-        using System;
-class Program
+
+//8. Geriye Koleksiyon Döndüren ve Veriyi Filtreleyen Metot
+//Soru: string türünde bir dizi alan bir metot yazın.Bu metot, sadece
+//uzunluğu 5 karakterden büyük olan elemanları içeren bir List<string> döndürsün.
+//İpucu: List<string> türünde bir metot tanımlayarak döngü ile filtreleme yapabilirsiniz.
+
+
+static List<string> bestenbuyuk(string[] a)
 {
-    static void Main()
+    List<string> yeniliste = new List<string>();
+    foreach (string i in a)
     {
-        int[] sayilar = { 10, 25, 7, 40, 15 };
-        int enBuyukDeger = EnBuyukDegeriBul(sayilar);
-        Console.WriteLine("Dizideki en büyük değer: " + enBuyukDeger);
-    }
-    static int EnBuyukDegeriBul(int[] dizi)
-    {
-        int enBuyuk = dizi[0];
-        foreach (int sayi in dizi)
+        if (i.Length > 5)
         {
-            if (sayi > enBuyuk;
-            {
-                enBuyuk = sayi;
-            }
-        }
-        //
-        using System;
-class Program
-    {
-        static int CalculateSum(int a, int b)
-        {
-            return a + b;
-        }
-        static double CalculateSum(double a, double b)
-        {
-            return a + b;
-        }
-        static int CalculateSum(int a, int b, int c)
-        {
-            return a + b + c;
-        }
-        static void Main()
-        {
-            Console.WriteLine("İki int sayının toplamı: " +
-            CalculateSum(3, 5)); // int + int
-            Console.WriteLine("İki double sayının toplamı: " +
-            CalculateSum(3.5, 5.2)); // double + double
-            Console.WriteLine("Üç int sayının toplamı: " + CalculateSum
-            (1, 2, 3)); // int + int + int
+            yeniliste.Add(i);
         }
     }
-    def fibonacci(n):
-# Fibonacci dizisinin ilk iki elemanı: 0 ve 1
-if n <= 1:
-return n
-else:
-return fibonacci(n-1) + fibonacci(n-2)
-        //
-        using System;
-class Program
-{
-    static double OrtalamaHesapla(params double[] sayilar)
-    {
-        if (sayilar.Length == 0)
-        {
-            throw new ArgumentException("En az bir sayı
-            girmelisiniz.");
-        }
-        double toplam = 0;
-        foreach (var sayi in sayilar)
-        {
-            toplam += sayi;
-        }
-        return toplam / sayilar.Length;
-    }
-    static void Main()
-    {
-        try
-        {
-            double ortalama = OrtalamaHesapla(10.5, 20.3, 30.7, 40.2);
-            Console.WriteLine("Ortalama: " + ortalama);
-            using System;
-class Program
-    {
-        static int Topla(int[] dizi, int filtre)
-        {
-            int toplam = 0;
-            foreach (int eleman in dizi)
-            {
-                if (eleman > filtre)
-                {
-                    toplam += eleman;
-                }
-            }
-            return toplam;
-        }
-        static void Main()
-        {
-            int[] dizi = { 1, 5, 10, 3, 7, 8 };
-            int filtre = 4;
-            int sonuc = Topla(dizi, filtre);
-            Console.WriteLine("Filtre değerinden büyük elemanların
-            toplamı: " + sonuc);
-        }
-    }
-    def yas_farki(yas= 18):
-return yas - 18
-kullanım:
-print(yas_farki(25)) : 7
+
+    return yeniliste;
+}
 
 
 
 
-        using System;
-using System.Collections.Generic;
-class Program
-    {
-        static List<string> FiltreleUzunElemanlar(string[] dizi)
-        {
-            List<string> sonuc = new List<string>();
-            foreach (string eleman in dizi)
-            {
-                if (eleman.Length > 5)
-                {
-                    sonuc.Add(eleman);
-                }
-            }
-            return sonuc;
-        }
-        static void Main()
-        {
-            string[] dizi = { "apple", "banana", "kiwi", "strawberry",
-"pear" };
-            List<string> uzunElemanlar = FiltreleUzunElemanlar(dizi);
-            foreach (var eleman in uzunElemanlar)
-            {
-                Console.WriteLine(eleman);
-            }
-        }
+
+
+
+
     }
-    print(yas_farki()) : 0
+
+
+}
